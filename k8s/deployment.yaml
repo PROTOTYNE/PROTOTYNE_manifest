@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: live-server
-          image: yourdockerhub/live_server:latest  # GitHub Actions가 수정함
+          image: christer10/live_server:latest
           ports:
             - containerPort: 8080
           env:
