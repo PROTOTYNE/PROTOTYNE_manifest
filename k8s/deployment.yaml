@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: live-server
-          image: christer10/live_server:1.0.6
+          image: christer10/live_server:1.0.8
           ports:
             - containerPort: 8080
           envFrom:
