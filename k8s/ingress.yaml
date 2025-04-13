@@ -4,8 +4,12 @@ metadata:
   name: live-server-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    aws-load-balancer-controller.k8s.aws/certificate-arn:
+      valueFrom:
+        secretKeyRef:
+          name: acm-cert-secret
+          key: certificate-arn
 spec:
   ingressClassName: nginx
   rules:
@@ -22,4 +26,3 @@ spec:
   tls:
     - hosts:
         - prototyne.site
-      secretName: prototyne-tls
