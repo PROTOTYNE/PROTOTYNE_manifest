@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: live-server
-  labels:
-    app: live-server
 spec:
   replicas: 1
   selector:
@@ -19,6 +17,6 @@ spec:
           image: christer10/live_server:1.0.4
           ports:
             - containerPort: 8080
-          env:
-            - name: SPRING_PROFILES_ACTIVE
-              value: "prod"
+          envFrom:
+            - secretRef:
+                name: live-server-secrets
