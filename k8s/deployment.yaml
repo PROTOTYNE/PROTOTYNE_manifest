@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: live-server
+  labels:
+    app: live-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: live-server
+  template:
+    metadata:
+      labels:
+        app: live-server
+    spec:
+      containers:
+        - name: live-server
+          image: yourdockerhub/live_server:latest  # GitHub Actions가 수정함
+          ports:
+            - containerPort: 8080
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: "prod"
