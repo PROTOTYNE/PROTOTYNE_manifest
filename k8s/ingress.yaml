@@ -3,11 +3,11 @@ kind: Ingress
 metadata:
   name: live-server-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/certificate-arn: PLACEHOLDER-TO-BE-PATCHED
 spec:
-  ingressClassName: nginx
+  ingressClassName: alb
   rules:
     - host: prototyne.site
       http:
@@ -19,7 +19,3 @@ spec:
                 name: live-server
                 port:
                   number: 80
-  tls:
-    - hosts:
-        - prototyne.site
-      secretName: prototyne-tls
